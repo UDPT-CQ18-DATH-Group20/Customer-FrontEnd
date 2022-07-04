@@ -9,6 +9,6 @@ class HomeController extends BaseController
 
     public function index()
     {
-        $this->render('index', null);
+        $this->render('index', ["gretting"=> "hi"]);
     }
 }

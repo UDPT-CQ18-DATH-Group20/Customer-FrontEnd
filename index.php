@@ -1,4 +1,7 @@
 <?php
+session_start();
+require 'vendor/autoload.php';
+
 require('./config/file_path.php');
 require(CONFIG_PATH . 'site_path.php');
 require(LIB_PATH . 'helpers.php');
@@ -14,7 +17,8 @@ if (isset($_GET["controller"])) {
 
 
 $controllers = array(
-    'home' => array('index')
+    'home' => array('index'),
+    'account' => array('index','login','register','sign-in','sign-up','logout'),
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
