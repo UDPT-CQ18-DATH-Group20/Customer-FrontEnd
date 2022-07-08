@@ -15,10 +15,10 @@ if (isset($_GET["controller"])) {
     redirect_to(HOME_URI);
 }
 
-
 $controllers = array(
     'home' => array('index'),
-    'account' => array('index','login','register','sign-in','sign-up','logout'),
+    'account' => array('index', 'login', 'register', 'sign-in', 'sign-up', 'logout'),
+    'shopping' => array("index", "search", "test")
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
