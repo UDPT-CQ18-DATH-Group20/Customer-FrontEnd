@@ -4,7 +4,7 @@ class ProductDetailController extends BaseController
 {
     public function __construct()
     {
-        $this->folder = 'shop-detail';
+        $this->folder = 'product-detail';
     }
     public function model($model){
         require_once MODEL_PATH.$model.".php";
