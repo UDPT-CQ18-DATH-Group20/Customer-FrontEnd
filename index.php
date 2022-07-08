@@ -19,6 +19,7 @@ if (isset($_GET["controller"])) {
 $controllers = array(
     'home' => array('index'),
     'account' => array('index','login','register','sign-in','sign-up','logout'),
+    'product_detail' => array( 'index' )
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
