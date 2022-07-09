@@ -12,10 +12,13 @@ class ProductDetailController extends BaseController
     }
     public function index()
     {
+        setlocale(LC_MONETARY,"en_US");
         $id = $_GET['id'];
         $productDetailModel = $this->model("ProductDetailModel");
         $result = $productDetailModel->getProductById($id);
-        $product = $result->getBody()->getContents(); 
-        $this->render('index', ["product"=> json_decode($product)]);
+        $product = json_decode($result->getBody()->getContents());
+        $this->render('index', ["product"=> $product]);
     }
+
+    
 }
