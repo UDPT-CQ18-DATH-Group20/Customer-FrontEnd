@@ -1,5 +1,5 @@
-const GOODS_URI = "/api/goods";
-const GOODS_TYPE_URI = "/api/goods/type";
+const GOODS_API_URI = "/api/goods";
+const GOODS_TYPE_PATH = "type/";
 const LIMIT = 100;
 const SKIP = 0;
 
@@ -20,7 +20,7 @@ export async function searchGoods(search, types = []) {
   params.append("limit", LIMIT);
   params.append("skip", SKIP);
 
-  var request = new Request(GOODS_URI + "?" + params, {
+  var request = new Request(GOODS_API_URI + "?" + params, {
     method: "GET",
   });
 
@@ -35,7 +35,7 @@ export async function searchGoods(search, types = []) {
 export async function getGoodsType() {
   let data = [];
 
-  let response = await fetch(GOODS_TYPE_URI);
+  let response = await fetch(GOODS_API_URI + "/" + GOODS_TYPE_PATH);
   if (response.status === 200) {
     data = await response.json();
   } else alert(response.status + response.statusText);

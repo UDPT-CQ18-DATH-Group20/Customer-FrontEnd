@@ -1,8 +1,9 @@
-const GOODS_URI = "/api/goods";
+const PRODUCT_URI =
+  "http://localhost/index.php?controller=product&action=index";
 const PRODUCT_TEMPLATE = (function () {
   var htmlFragment =
     '<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 product">' +
-    '<div class="products-single fix product-id">' +
+    '<div class="products-single fix">' +
     '<div class="box-img-hover">' +
     '<div class="type-lb">' +
     '<p class="new product-type">New</p>' +
@@ -98,7 +99,7 @@ export function createProductElem({ _id, name, picture, type, price }) {
   imageElem.src = picture;
   typeElem.textContent = type;
   priceElem.textContent = "$" + price;
-  linkElem.href = GOODS_URI + "/" + _id;
+  linkElem.href = PRODUCT_URI + "&id=" + _id;
 
   return newProductElem;
 }
