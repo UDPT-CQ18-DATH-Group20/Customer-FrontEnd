@@ -4,6 +4,7 @@ define("ERROR_URI", 'index.php?controller=error&action=index');
 define("LOGIN_URI", 'index.php?controller=account&action=login');
 define("REGISTER_URI", 'index.php?controller=account&action=register');
 define("LOGOUT_URI", 'index.php?controller=account&action=logout');
+define("SHOPPING_URI", "index.php?controller=shopping&action=search");
 
 define('PUBLIC_URI', 'public/');
 define('STYLE_SHEET_URI', PUBLIC_URI . 'css/');

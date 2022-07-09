@@ -11,7 +11,7 @@ class BaseController
         if (is_file($view_file)) {
             if (!is_null($data))
                 extract($data);
-            require_once(TEMPLATE_PATH.'index.phtml');
+            require_once(TEMPLATE_PATH . 'index.phtml');
         } else {
             redirect_to(ERROR_URI);
         }
