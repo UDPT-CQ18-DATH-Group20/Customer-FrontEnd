@@ -25,8 +25,14 @@ class AccountController extends  BaseController
     }
     public function model($model)
     {
-        require_once "./src/models/" . $model . ".php";
+        require_once MODEL_PATH . $model . ".php";
         return new $model;
+    }
+    public function checkCustomRequireLogin()
+    {
+        if (!isset($this->token)) {
+            header('Location: ' . LOGIN_URI);
+        }
     }
     function index()
     {
