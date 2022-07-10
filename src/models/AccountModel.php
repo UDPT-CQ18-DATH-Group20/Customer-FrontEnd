@@ -7,7 +7,7 @@ class AccountModel{
     public $client;
 
     function __construct(){
-        $this->client = new Client(['base_uri' => 'http://localhost:3000']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3000']);
     }
 
     public function signUp(){
@@ -47,4 +47,3 @@ class AccountModel{
         return $res;
     }
 }
-?>

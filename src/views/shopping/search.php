@@ -6,7 +6,7 @@
                     <div class="product-item-filter row">
                         <div class="col-12 col-sm-8 text-center text-sm-left">
                             <div class="toolbar-sorter-right">
-                                <div id="product-type">
+                                <div id="product-type" class="form-check">
                                 </div>
                             </div>
                         </div>
