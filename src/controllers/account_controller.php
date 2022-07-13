@@ -30,7 +30,8 @@ class AccountController extends  BaseController
     }
     public function checkCustomRequireLogin()
     {
-        if (!isset($this->token)) {
+        $modelAccount = $this->model("AccountModel");
+        if ($modelAccount->isUserLogin()) {
             header('Location: ' . LOGIN_URI);
         }
     }
@@ -79,9 +80,17 @@ class AccountController extends  BaseController
     function signUp()
     {
         try {
+            //Đăng ký tài khoản 
             $modelAccount = $this->model("AccountModel");
             $result = $modelAccount->signUp();
             $account = $result->getBody()->getContents();
+
+            //Tạo giỏ hàng
+            $result = $modelAccount->signIn();
+            $content = $result->getBody()->getContents();
+            $token = json_decode($content)->token;
+            $cartModel = $this->model("CartModel");
+            $result = $cartModel->createCart($token);
             header("Location: " . LOGIN_URI);
         } catch (ClientException  $e) {
             if ($e->hasResponse()) {

@@ -23,13 +23,16 @@ class ProductController extends BaseController
     {
         if (is_post_request()) {
             if ($_SESSION["token"]) {
-                $uri = $_SERVER['REQUEST_URI'];
+                // $uri = $_SERVER['REQUEST_URI'];
                 // $paths = explode('/', $uri);
                 // $id = $paths[sizeof($paths) - 2];
                 $id = $_GET["id"];
                 $token = $_SESSION["token"];
                 $productDetailModel = $this->model("ProductModel");
                 $result = $productDetailModel->addToCart($id, $token);
+                if (!$result) {
+                    echo "<script>alert('Internal Server Error')</script>";
+                }
                 redirect_to(PRODUCT_URI . "&id=" . $id);
             } else {
                 redirect_to(LOGIN_URI);

@@ -17,12 +17,15 @@
                                     <button id="search-btn" type="submit"> <i class="fa fa-search"></i> </button>
                                 </div>
                             </div>
+                            <div><strong>Tìm kiếm <i id="search-phrase"></i></strong></div>
                         </div>
                     </div>
                     <div class="product-categorie-box">
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
-                                <div id="product-grid" class="row">
+                        <div>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                    <div id="product-grid" class="row">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +33,10 @@
                 </div>
             </div>
         </div>
+        <nav aria-label="Page navigation example">
+            <ul id="pagination" class="pagination justify-content-center pagination-lg">
+            </ul>
+        </nav>
     </div>
-</div>
-</div>
-<script defer type="module" src="script/shopping-search.js"></script>
+
+    <script defer type="module" src="script/shopping/search/index.js"></script>

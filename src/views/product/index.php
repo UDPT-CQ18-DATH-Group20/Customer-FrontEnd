@@ -47,15 +47,15 @@
                                 <form action="<?= ADD_TO_CART_URI . "&id={$product->_id}" ?>" method="POST">
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Quantity</label>
-                                        <input class="form-control" value="1" min="0" max="100" type="number">
+                                        <input id='product-quantity' class="form-control" name="quantity" value="1" min="0" max="100" type="number">
                                     </div>
                                     <div class="price-box-bar">
                                         <div class="cart-and-bay-btn">
                                             <!-- <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a> -->
-                                            <button type="submit" class="btn hvr-hover" data-fancybox-close="">Add to cart</button>
+                                            <button id="add-to-cart" type="submit" class="btn hvr-hover" data-fancybox-close="">Add to cart</button>
                                         </div>
                                     </div>
-                                </form>
+                                    <form>
                             </li>
                         </ul>
 
@@ -108,4 +108,5 @@
             </div>
         </div>
     </div>
-    <!-- End Cart -->
+    <!-- End Shop Detail  -->
+    <!-- <script defer type="module" src="script/product/index/index.js"></script> -->

@@ -1,14 +1,10 @@
-const GOODS_API_URI = "/api/goods";
-const GOODS_TYPE_PATH = "type/";
-const LIMIT = 100;
-const SKIP = 0;
+import { GOODS_API_URI, GOODS_TYPE_PATH, PRODUCTS_PER_PAGE } from "./const.js";
 
-export async function searchGoods(search, types = []) {
+export async function searchProduct(search, types = [], page = 1) {
   let params = new URLSearchParams();
   if (search) {
     params.append("search", search);
   }
-  console.log(search);
 
   if (types) {
     for (const type of types) {
@@ -17,8 +13,8 @@ export async function searchGoods(search, types = []) {
     }
   }
 
-  params.append("limit", LIMIT);
-  params.append("skip", SKIP);
+  params.append("limit", PRODUCTS_PER_PAGE);
+  params.append("page", page);
 
   var request = new Request(GOODS_API_URI + "?" + params, {
     method: "GET",
@@ -32,7 +28,7 @@ export async function searchGoods(search, types = []) {
   return data;
 }
 
-export async function getGoodsType() {
+export async function allProductTypes() {
   let data = [];
 
   let response = await fetch(GOODS_API_URI + "/" + GOODS_TYPE_PATH);
@@ -42,3 +38,5 @@ export async function getGoodsType() {
 
   return data;
 }
+
+export async function countSearchDoc(search, types = []) {}

@@ -29,7 +29,13 @@ class ProductModel
         $headers = [
             "Authorization" => "Bearer " . $token
         ];
-        $promise = $this->client->requestAsync("POST", "/api/goods/{$id}", ["headers" => $headers]);
+        $quantity = $_POST["quantity"];
+        $promise =
+            $this->client->requestAsync(
+                "POST",
+                "/api/goods/cart/{$id}",
+                ["headers" => $headers, "query" => ["quantity" => $quantity]]
+            );
 
         $response = $promise->wait();
         if ($response->getStatusCode() === 200) {
