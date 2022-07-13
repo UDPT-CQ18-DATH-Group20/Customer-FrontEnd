@@ -27,7 +27,6 @@
 </nav>
 <!-- End Navbar -->
 <div class="wrapper wrapper-full-page">
-<<<<<<< HEAD
   <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('assets/img/login.jpg'); background-size: cover; background-position: top center;">
     <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
     <div class="container">
@@ -61,6 +60,17 @@
                   </div>
                 </span>
               </div>
+              <div class="row">
+                <div class="col-md-12 mr-auto">
+                  <div class="warring-red" id='alert_msg'>
+                    <?php
+                    if (isset($_SESSION["errormsg_login"])) {
+                      echo $_SESSION["errormsg_login"];
+                      unset($_SESSION["errormsg_login"]);
+                    } ?>
+                  </div>
+                </div>
+              </div>
               <div class="card-footer justify-content-center">
                 <button type="submit" class="btn btn-rose btn-link btn-lg">Lets Go</button>
               </div>
@@ -71,63 +81,4 @@
     </div>
 
   </div>
-=======
-    <div class="page-header login-page header-filter" filter-color="black"
-        style="background-image: url('assets/img/login.jpg'); background-size: cover; background-position: top center;">
-        <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-                    <form class="form" method="POST" action="/index.php?controller=account&action=sign-in">
-                        <div class="card card-login card-hidden">
-                            <div class="card-header card-header-rose text-center">
-                                <h4 class="card-title">Login</h4>
-                            </div>
-                            <div class="card-body ">
-                                <p class="card-description text-center"></p>
-                                <span class="bmd-form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="material-icons">account_circle</i>
-                                            </span>
-                                        </div>
-                                        <input type="text" name="username" class="form-control"
-                                            placeholder="username...">
-                                    </div>
-                                </span>
-                                <span class="bmd-form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="material-icons">lock_outline</i>
-                                            </span>
-                                        </div>
-                                        <input type="password" name="password" class="form-control"
-                                            placeholder="password...">
-                                    </div>
-                                </span>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mr-auto">
-                                    <div class="warring-red" id='alert_msg'>
-                                        <?php 
-                                            if(isset($_SESSION["errormsg_login"])){ 
-                                                echo $_SESSION["errormsg_login"];
-                                                unset($_SESSION["errormsg_login"]);
-                                            }?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer justify-content-center">
-                                <button type="submit" class="btn btn-rose btn-link btn-lg">Lets Go</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    </div>
->>>>>>> 0d9ba7b5370052c0d23680fcbb3f28438c7b9c04
 </div>
