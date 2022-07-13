@@ -58,12 +58,15 @@ class AccountController extends  BaseController
             $result = $modelAccount->signIn();
             $token = $result->getBody()->getContents();
             $_SESSION["token"] = json_decode($token)->token;
-            header("Location: " . HOME_URI);
+            if (isset($_SESSION["back-url"])) {
+                redirect_to($_SESSION["back-url"]);
+                unset($_SESSION["back-url"]);
+            } else redirect_to(HOME_URI);
         } catch (ClientException $e) {
             if ($e->hasResponse()) {
                 if ($e->getResponse()->getStatusCode() == '400') {
                     $_SESSION["errormsg_login"] = $e->getResponse()->getBody()->getContents();
-                    header("Location: ".LOGIN_URI);
+                    header("Location: " . LOGIN_URI);
                     die();
                 }
             }

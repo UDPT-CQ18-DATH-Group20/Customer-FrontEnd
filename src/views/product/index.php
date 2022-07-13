@@ -109,4 +109,3 @@
         </div>
     </div>
     <!-- End Shop Detail  -->
-    <!-- <script defer type="module" src="script/product/index/index.js"></script> -->
