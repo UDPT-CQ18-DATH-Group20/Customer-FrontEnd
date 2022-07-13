@@ -62,8 +62,8 @@ class AccountController extends  BaseController
         } catch (ClientException $e) {
             if ($e->hasResponse()) {
                 if ($e->getResponse()->getStatusCode() == '400') {
-                    $_SESSION["errormsLogin"] = "login";
-                    header("Location: " . LOGIN_URI);
+                    $_SESSION["errormsg_login"] = $e->getResponse()->getBody()->getContents();
+                    header("Location: ".LOGIN_URI);
                     die();
                 }
             }
