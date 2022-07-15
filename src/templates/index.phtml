@@ -66,15 +66,22 @@
                 <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
                     <ul>
-                        <li class="side-menu">
-                            <a href="#">
-                                <i class="fa fa-shopping-bag"></i>
-                                <span class="badge">3</span>
-                                <p>My Cart</p>
-                            </a>
-                        </li>
+                        <?php if (isset($_SESSION["token"])) : ?>
+                            <li class="side-menu">
+                                <a href="<?= GET_CART_URI ?>">
+                                    <i class="fa fa-shopping-bag"></i>
+                                    <!-- <span class="badge">3</span> -->
+                                    <p>My Cart</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                         <li>
-                            <a href="/index.php?controller=account&action=login"><i class="fa fa-user s_color"></i>login</a>
+                            <a href="/index.php?controller=account&action=login">
+                                <i class="fa fa-user s_color"></i>
+                                <?php if (!isset($_SESSION["token"])) : ?>
+                                    login
+                                <?php endif; ?>
+                            </a>
                         </li>
                     </ul>
                 </div>

@@ -47,7 +47,7 @@
                                 <form action="<?= ADD_TO_CART_URI . "&id={$product->_id}" ?>" method="POST">
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Quantity</label>
-                                        <input id='product-quantity' class="form-control" name="quantity" value="1" min="0" max="100" type="number">
+                                        <input id='product-quantity' class="form-control" name="quantity" value="1" min="0" max="<?php $product->remains ?>" type="number">
                                     </div>
                                     <div class="price-box-bar">
                                         <div class="cart-and-bay-btn">
@@ -58,8 +58,6 @@
                                     <form>
                             </li>
                         </ul>
-
-
                     </div>
                 </div>
             </div>

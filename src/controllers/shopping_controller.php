@@ -17,9 +17,4 @@ class ShoppingController extends BaseController
     {
         $this->render('search', null);
     }
-
-    public function test()
-    {
-        $this->render('test', null);
-    }
 }
