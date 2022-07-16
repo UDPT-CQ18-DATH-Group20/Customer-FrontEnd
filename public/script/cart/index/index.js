@@ -46,7 +46,7 @@ async function removeItem(good_id) {
     alert(msg.message);
   } else alert(msg.status, msg.message);
 
-  ndow.location.reload();
+  window.location.reload();
 }
 
 async function updateItem(good_id, event) {
