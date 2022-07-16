@@ -13,11 +13,17 @@ class ProductController extends BaseController
     }
     public function index()
     {
+        //product +store detial
         $id = $_GET['id'];
         $productDetailModel = $this->model("ProductModel");
         $result = $productDetailModel->getProductById($id);
         $product = $result->getBody()->getContents();
-        $this->render('index', ["product" => json_decode($product)]);
+        //get comment
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $commentModel = $this->model("CommentModel");
+        $comments = $commentModel->getCommentByProduct($id,$page)->getBody()->getContents();
+        //render
+        $this->render('index', ["product" => json_decode($product), "comments" => json_decode($comments)]);
     }
     public function addToCart()
     {

@@ -29,7 +29,7 @@
 <!-- End Navbar -->
 <div class="wrapper wrapper-full-page">
     <div class="page-header register-page header-filter" filter-color="black"
-        style="background-image: url('/public/assets/img/register.jpg')">
+        style="background-image: url('/assets/img/register.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 ml-auto mr-auto">
