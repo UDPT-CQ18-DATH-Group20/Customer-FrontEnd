@@ -463,11 +463,22 @@
                               </td>
                               <td><?=$order->total_amount?></td>
                               <td class="text-right">
+                                <!-- <select class="selectpicker select-status" name="status" data-id="<?=$order->_id?>" data-style="btn btn-link" title="">
+                                <?php if(strcmp($order->status, 'Submitted' ) == 0): ?>
+                                  <option value="Submitted" disabled selected>Chờ xử lý</option>
+                                  <option value="In process">Đang chuẩn bị</option>
+                                  <option value="Rejected">Huỷ</option>
+                                <?php endif; ?> 
+                                <?php if(strcmp($order->status, 'In process' ) == 0): ?>
+                                  <option value="In process">Đang chuẩn bị</option>
+                                  <option value="Ready to delivery">Sẵn sàng Giao</option>
+                                <?php endif; ?> 
+                                </select> -->
                                 <?php if(strcmp($order->status, 'Submitted' ) == 0): ?>
                                   <form action="index.php?controller=order&action=updateOrderStatus" method="POST" class="btn btn-link btn-info btn-just-icon like">
                                     <input type="hidden" name="status" value="In process">
                                     <input type="hidden" name="order_id" value="<?=$order->_id?>">
-                                    <button type="submit" class="material-icons">favorite</button>
+                                    <button type="submit" class="material-icons">done</button>
                                   </form>
                                   <form action="index.php?controller=order&action=updateOrderStatus" method="POST" class="btn btn-link btn-danger btn-just-icon remove">
                                     <input type="hidden" name="status" value="Rejected">

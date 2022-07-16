@@ -471,7 +471,7 @@
                                 <?php else: ?>
                                   <form action="index.php?controller=order&action=updateOrderStatus" method="POST" class="btn btn-link btn-danger btn-just-icon remove">
                                     <input type="hidden" name="status" value="Received">
-                                    <button type="submit" name="order_id" value="<?=$order->_id?>" class="material-icons">close</button>
+                                    <button type="submit" name="order_id" value="<?=$order->_id?>" class="material-icons">done</button>
                                   </form>
                                 <?php endif; ?>
                               </td>

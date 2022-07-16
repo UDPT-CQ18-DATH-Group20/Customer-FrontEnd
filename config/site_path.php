@@ -8,6 +8,7 @@ define("SHOPPING_URI", "index.php?controller=shopping&action=search");
 define("PRODUCT_URI", "index.php?controller=product&action=index");
 define("ADD_TO_CART_URI", "index.php?controller=product&action=add-to-cart");
 define("GET_CART_URI", "index.php?controller=cart&action=index");
+define("CHECK_OUT_URI", "index.php?controller=order&action=checkOut");
 
 define('PUBLIC_URI', 'public/');
 define('STYLE_SHEET_URI', PUBLIC_URI . 'css/');
