@@ -10,7 +10,7 @@ class AccountModel
 
     function __construct()
     {
-        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3000']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal']);
     }
 
     public function signUp()
