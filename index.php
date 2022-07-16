@@ -20,6 +20,7 @@ $controllers = array(
     'account' => array('index', 'login', 'register', 'sign-in', 'sign-up', 'logout'),
     'shopping' => array("index", "search", "test"),
     'product' => array('index', "add-to-cart"),
+    'order' => array('checkOut', 'createOrder', 'loadOrdersOfCustomer', 'loadOrdersOfStore', 'updateOrderStatus', 'loadReadyToDelivery'),
     'cart' => array('index')
 );
 
