@@ -56,8 +56,9 @@ class AccountController extends  BaseController
         try {
             $modelAccount = $this->model("AccountModel");
             $result = $modelAccount->signIn();
-            $token = $result->getBody()->getContents();
-            $_SESSION["token"] = json_decode($token)->token;
+            $content = $result->getBody()->getContents();
+            $_SESSION["token"] = json_decode($content)->token;
+
             if (isset($_SESSION["back-url"])) {
                 redirect_to($_SESSION["back-url"]);
                 unset($_SESSION["back-url"]);

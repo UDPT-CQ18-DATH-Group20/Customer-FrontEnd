@@ -20,7 +20,7 @@ $controllers = array(
     'account' => array('index', 'login', 'register', 'sign-in', 'sign-up', 'logout'),
     'shopping' => array("index", "search", "test"),
     'product' => array('index', "add-to-cart"),
-    'cart' => array('index')
+    'cart' => array('index', 'remove-item', "update-item")
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
