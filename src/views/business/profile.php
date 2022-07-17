@@ -1,5 +1,5 @@
 <div class="wrapper ">
-    <div class="sidebar" data-color="rose" data-background-color="black" data-image="assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="rose" data-background-color="black" data-image="../../assets/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -14,13 +14,62 @@
         </a>
       </div>
       <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item active">
-            <a class="nav-link " href="<?= DELIVERY_URI ?>">
-              <i class="material-icons">dashboard</i>
-              <p> Shipper </p>
+        <div class="user">
+          <div class="photo">
+            <img src="../../assets/img/faces/avatar.jpg" />
+          </div>
+          <div class="user-info">
+            <a data-toggle="collapse" href="#collapseExample" class="username">
+              <span>
+                Tania Andrew
+                <b class="caret"></b>
+              </span>
             </a>
+            <div class="collapse" id="collapseExample">
+              <ul class="nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span class="sidebar-mini"> MP </span>
+                    <span class="sidebar-normal"> My Profile </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span class="sidebar-mini"> EP </span>
+                    <span class="sidebar-normal"> Edit Profile </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span class="sidebar-mini"> S </span>
+                    <span class="sidebar-normal"> Settings </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <ul class="nav">
+          
+          <li class="nav-item active ">
+            <a class="nav-link" data-toggle="collapse" href="#tablesExamples" aria-expanded="true">
+              <i class="material-icons">grid_on</i>
+              <p> Tables
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse show" id="tablesExamples">
+              <ul class="nav">
+                <li class="nav-item active ">
+                  <a class="nav-link" href="index.php?controller=business&action=index">
+                    <span class="sidebar-mini"> DT </span>
+                    <span class="sidebar-normal"> Hồ Sơ Đăng Ký Bán Hàng </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
+          
         </ul>
       </div>
     </div>
@@ -35,7 +84,7 @@
                 <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">DataTables.net</a>
+            <a class="navbar-brand" href="#pablo">Hồ sơ đăng ký bán hàng</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -89,7 +138,7 @@
                   <a class="dropdown-item" href="#">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="<?= LOGOUT_URI?>">Log out</a>
+                  <a class="dropdown-item" href="#">Log out</a>
                 </div>
               </li>
             </ul>
@@ -106,7 +155,7 @@
                   <div class="card-icon">
                     <i class="material-icons">assignment</i>
                   </div>
-                  <h4 class="card-title">DataTables.net</h4>
+                  <h4 class="card-title">Hồ sơ đăng ký bán hàng</h4>
                 </div>
                 <div class="card-body">
                   <div class="toolbar">
@@ -116,88 +165,37 @@
                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                       <thead>
                         <tr>
-                            <th>Customer</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Products</th>
-                            <th>Amount</th>
-                            <th>Price</th>
-                            <th>Total</th>
-                            <th class="disabled-sorting text-right">Actions</th>
+                          <th>Tên</th>
+                          <th>Email</th>
+                          <th>Office</th>
+                          <th>Age</th>
+                          <th>Date</th>
+                          <th class="disabled-sorting text-right">Actions</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                            <th>Customer</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Products</th>
-                            <th>Amount</th>
-                            <th>Price</th>
-                            <th>Total</th>
+                          <th>Name</th>
+                          <th>Position</th>
+                          <th>Office</th>
+                          <th>Age</th>
+                          <th>Start date</th>
                           <th class="text-right">Actions</th>
                         </tr>
                       </tfoot>
                       <tbody>
-                          <?php
-                              foreach ($response as $order) 
-                              {
-                          ?>
-                            <tr>
-                              <td><?=$order->receiver_name?></td>
-                              <td><?=$order->phone?></td>
-                              <td><?=$order->email?></td>
-                              <td><?=$order->address?></td>
-                              <td>
-                                <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                    <?=$item->name?><br>
-                                <?php
-                                    }
-                                ?>
-                              </td>
-                              <td>
-                                <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                    <?=$item->quantity?><br>
-                                <?php
-                                  }
-                                ?>
-                              </td>
-                              <td>
-                                <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                    <?=$item->sum_amount?><br>
-                                <?php
-                                  }
-                                ?>
-                              </td>
-                              <td><?=$order->total_amount?></td>
-                              <td class="text-right">
-                                <?php if(strcmp($order->status, 'Ready to delivery' ) == 0): ?>
-                                  <form action="index.php?controller=order&action=updateOrderStatus" method="POST" class="btn btn-link btn-warning btn-just-icon edit">
-                                    <input type="hidden" name="status" value="On delivery">
-                                    <button type="submit" name="order_id" value="<?=$order->_id?>" class="material-icons">local_shipping</button>
-                                  </form>
-                                <?php else: ?>
-                                  <form action="index.php?controller=order&action=updateOrderStatus" method="POST" class="btn btn-link btn-danger btn-just-icon remove">
-                                    <input type="hidden" name="status" value="Received">
-                                    <button type="submit" name="order_id" value="<?=$order->_id?>" class="material-icons">done</button>
-                                  </form>
-                                <?php endif; ?>
-                              </td>
-                            </tr>        
-                          <?php
-                              }
-                          ?>
+                        <tr>
+                          <td>Tiger Nixon</td>
+                          <td>System Architect</td>
+                          <td>Edinburgh</td>
+                          <td>61</td>
+                          <td>2011/04/25</td>
+                          <td class="text-right">
+                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">favorite</i></a>
+                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
+                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>  
                   </div>
@@ -310,22 +308,22 @@
         <li class="header-title">Images</li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="assets/img/sidebar-1.jpg" alt="">
+            <img src="../../assets/img/sidebar-1.jpg" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="assets/img/sidebar-2.jpg" alt="">
+            <img src="../../assets/img/sidebar-2.jpg" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="assets/img/sidebar-3.jpg" alt="">
+            <img src="../../assets/img/sidebar-3.jpg" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="assets/img/sidebar-4.jpg" alt="">
+            <img src="../../assets/img/sidebar-4.jpg" alt="">
           </a>
         </li>
         <li class="button-container">

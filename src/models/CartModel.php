@@ -8,7 +8,7 @@ class CartModel
     public $client;
     function __construct()
     {
-        $this->client = new Client(["base_uri" => "http://host.docker.internal/api/cart/"]);
+        $this->client = new Client(["base_uri" => "http://host.docker.internal:3002/api/cart/"]);
     }
 
     public function getCart($token)

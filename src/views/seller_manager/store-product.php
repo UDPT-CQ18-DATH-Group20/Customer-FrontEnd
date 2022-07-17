@@ -1,5 +1,5 @@
 <div class="wrapper ">
-    <div class="sidebar" data-color="rose" data-background-color="black" data-image="assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="rose" data-background-color="black" data-image="../../assets/img/sidebar-1.jpg">
         <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -14,14 +14,14 @@
             </a>
         </div>
         <div class="sidebar-wrapper">
-            <ul class="nav">
-                <li class="nav-item active">
-                    <a class="nav-link " href="<?= STORE_ORDER_URI ?>">
+        <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= STORE_ORDER_URI ?>">
                         <i class="material-icons">dashboard</i>
-                        <p> Quản lý đơn hàng </p>
+                        <p> Quản lý hoá đơn </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="<?= STORE_PRODUCT_URI ?>">
                         <i class="material-icons">image</i>
                         <p> Quản lý sản phẩm
@@ -34,8 +34,9 @@
                         <p> Quản lý comment
                         </p>
                     </a>
-
+                  
                 </li>
+                
             </ul>
         </div>
     </div>
@@ -107,7 +108,7 @@
                                 <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="<?=LOGOUT_URI?>">Log out</a>
+                                <a class="dropdown-item" href="#">Log out</a>
                             </div>
                         </li>
                     </ul>
@@ -122,9 +123,11 @@
                         <div class="card">
                             <div class="card-header card-header-primary card-header-icon">
                                 <div class="card-icon">
-                                    <i class="material-icons">assignment</i>
+                                    <a href="#" data-toggle="modal" data-target="#modalProduct">
+                                        <i class="material-icons" style="color: #fff;">add</i>
+                                    </a>
                                 </div>
-                                <h4 class="card-title">DataTables.net</h4>
+                                <h4 class="card-title">Product</h4>
                             </div>
                             <div class="card-body">
                                 <div class="toolbar">
@@ -135,111 +138,33 @@
                                         cellspacing="0" width="100%" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Customer</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Address</th>
-                                                <th>Products</th>
-                                                <th>Amount</th>
-                                                <th>Price</th>
-                                                <th>Total</th>
-                                                <th class="disabled-sorting text-right">Actions</th>
+                                                <th>Mã sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Loại</th>
+                                                <th>Giá</th>
+                                                <th>Tồn kho</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Customer</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Address</th>
-                                                <th>Products</th>
-                                                <th>Amount</th>
-                                                <th>Price</th>
-                                                <th>Total</th>
-                                                <th class="text-right">Actions</th>
+                                            <th>Mã sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Loại</th>
+                                                <th>Giá</th>
+                                                <th>Tồn kho</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <?php
-                              foreach ($response as $order) 
-                              {
-                          ?>
+                                            <?php foreach($products as $product) :?>
                                             <tr>
-                                                <td><?=$order->receiver_name?></td>
-                                                <td><?=$order->phone?></td>
-                                                <td><?=$order->email?></td>
-                                                <td><?=$order->address?></td>
-                                                <td>
-                                                    <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                                    <?=$item->name?><br>
-                                                    <?php
-                                    }
-                                ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                                    <?=$item->quantity?><br>
-                                                    <?php
-                                  }
-                                ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                                    <?=$item->sum_amount?><br>
-                                                    <?php
-                                  }
-                                ?>
-                                                </td>
-                                                <td><?=$order->total_amount?></td>
-                                                <td class="text-right">
-                                                    <!-- <select class="selectpicker select-status" name="status" data-id="<?=$order->_id?>" data-style="btn btn-link" title="">
-                                <?php if(strcmp($order->status, 'Submitted' ) == 0): ?>
-                                  <option value="Submitted" disabled selected>Chờ xử lý</option>
-                                  <option value="In process">Đang chuẩn bị</option>
-                                  <option value="Rejected">Huỷ</option>
-                                <?php endif; ?> 
-                                <?php if(strcmp($order->status, 'In process' ) == 0): ?>
-                                  <option value="In process">Đang chuẩn bị</option>
-                                  <option value="Ready to delivery">Sẵn sàng Giao</option>
-                                <?php endif; ?> 
-                                </select> -->
-                                                    <?php if(strcmp($order->status, 'Submitted' ) == 0): ?>
-                                                    <form action="index.php?controller=order&action=updateOrderStatus"
-                                                        method="POST" class="btn btn-link btn-info btn-just-icon like">
-                                                        <input type="hidden" name="status" value="In process">
-                                                        <input type="hidden" name="order_id" value="<?=$order->_id?>">
-                                                        <button type="submit" class="material-icons">done</button>
-                                                    </form>
-                                                    <form action="index.php?controller=order&action=updateOrderStatus"
-                                                        method="POST"
-                                                        class="btn btn-link btn-danger btn-just-icon remove">
-                                                        <input type="hidden" name="status" value="Rejected">
-                                                        <input type="hidden" name="order_id" value="<?=$order->_id?>">
-                                                        <button type="submit" class="material-icons">close</button>
-                                                    </form>
-                                                    <?php else: ?>
-                                                    <form action="index.php?controller=order&action=updateOrderStatus"
-                                                        method="POST"
-                                                        class="btn btn-link btn-warning btn-just-icon edit">
-                                                        <input type="hidden" name="status" value="Ready to delivery">
-                                                        <input type="hidden" name="order_id" value="<?=$order->_id?>">
-                                                        <button type="submit" class="material-icons">dvr</button>
-                                                    </form>
-                                                    <?php endif; ?>
-                                                </td>
-                                            </tr>
-                                            <?php
-                              }
-                          ?>
+                                                <td><?= $product->_id?></td>
+                                                <td><?= $product->name?></td>
+
+                                                <td><?= $product->type?></td>
+                                                <td><?= $product->price?></td>
+                                                <td><?= $product->remains?></td>
+
+                                                <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -352,22 +277,22 @@
             <li class="header-title">Images</li>
             <li class="active">
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="assets/img/sidebar-1.jpg" alt="">
+                    <img src="../../assets/img/sidebar-1.jpg" alt="">
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="assets/img/sidebar-2.jpg" alt="">
+                    <img src="../../assets/img/sidebar-2.jpg" alt="">
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="assets/img/sidebar-3.jpg" alt="">
+                    <img src="../../assets/img/sidebar-3.jpg" alt="">
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="assets/img/sidebar-4.jpg" alt="">
+                    <img src="../../assets/img/sidebar-4.jpg" alt="">
                 </a>
             </li>
             <li class="button-container">
@@ -399,3 +324,90 @@
         </ul>
     </div>
 </div>
+
+<!-- Classic Modal -->
+<div class="modal fade modal-xl" id="modalProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 960px;">
+        <div class="modal-content modal-xl">
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="TypeValidation" class="form-horizontal" action="<?= STORE_CREATE_PRODUCT_URI ?>" method="post" enctype="multipart/form-data">
+                            <div class="card-header card-header-rose card-header-text">
+                                <div class="card-text">
+                                    <h4 class="card-title">Thôn tin sản phẩm</h4>
+                                </div>
+                            </div>
+                            <div class="card-body ">
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Tên sản phẩm</label>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input class="form-control" id="name" type="text" name="name"
+                                                required="true" />
+                                        </div>
+                                    </div>
+                                    <label for="type" class="col-sm-2 col-form-label">Loại</label>
+                                    <select class="form-control col-sm-4" id="type" name="type"
+                                        style="padding: 0 15px;">
+                                        <?php foreach($types as $type) :?>
+                                        <option value="<?=$type?>"><?=$type?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Giá</label>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="price" name="price"
+                                                number="true" required="true" />
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-2 col-form-label">Số lượng</label>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="remains" name="remains"
+                                                number="true" required="true" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput" style="    padding-left: 150px;">
+                                        <div class="fileinput-new thumbnail">
+                                            <img src="assets/img/image_placeholder.jpg" alt="...">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <div>
+                                            <span class="btn btn-rose btn-round btn-file">
+                                                <span class="fileinput-new">Select image</span>
+                                                <span class="fileinput-exists">Change</span>
+                                                <input type="file" name="picture" />
+                                            </span>
+                                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
+                                                data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer ml-auto mr-auto">
+                                    <button type="submit" class="btn btn-rose">Thêm sản phẩm</button>
+                                </div>
+
+                                </div>
+                                <div class="row">
+                                    <input id="_id" name="_id" hidden />
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-10 show-image"></div>
+                                </div>
+
+                        </form>
+
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--  End Modal -->

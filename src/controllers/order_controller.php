@@ -8,9 +8,8 @@ class OrderController extends BaseController
     public function __construct()
     {
         $this->folder = 'order';
-        // $this->client = new Client(['base_uri' => 'http://localhost:3001']);
-        $this->client = new Client(['base_uri' => 'http://host.docker.internal']);
-        // $_SESSION['token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmIzNzJlMWIwOWQ0YjYyN2M3NDQyZDciLCJ1c2VyX3R5cGUiOjEsImFjY291bnRfaW5mbyI6IjYyYjM3MmUxYjA5ZDRiNjI3Yzc0NDJkNiIsImlhdCI6MTY1NjE0MTkzMX0.DuwmatBqWytxvo5G3EnVNC7hWtPCM58_1YewHVdy8HU';
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3003']);
+        //$this->client = new Client(['base_uri' => 'http://host.docker.internal']);
     }
     public function render($view, $data=[])
     {
@@ -35,19 +34,11 @@ class OrderController extends BaseController
     public function checkOut()
     {
         //Send request to gateway
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $_SESSION['token']
-        ];
-        $query = '{
-            "user_id": "62b372e1b09d4b627c7442d7"
-        }';
-        $request = new Request('GET', '/cart', $headers, $query);
-        $res = $this->client->sendAsync($request)->wait();
-        $data = $res->getBody()->getContents();
 
-        //print_r($data);
-        $this->render('checkOut', ["cart" => json_decode($data)]);
+        $cartModel =  $this->model("CartModel");
+        $data =$cartModel->getCart( $_SESSION['token']);
+      
+        $this->render('checkOut', ["cart" => $data]);
     }
 
     public function createOrder()
@@ -63,7 +54,7 @@ class OrderController extends BaseController
             "email": "'.$_POST['email'].'",
             "address": "'.$_POST['address'].'"
         }';
-        $request = new Request('POST', '/orders/createOrder', $headers, $body);
+        $request = new Request('POST', '/orders/create', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         //
 
@@ -78,9 +69,7 @@ class OrderController extends BaseController
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer ' . $_SESSION['token']
         ];
-        $query = '{
-            "customer_id": "62b372e1b09d4b627c7442d7"
-        }';
+        $query = '{ }';
         $request = new Request('GET', '/orders/customerOrders', $headers, $query);
         $res = $this->client->sendAsync($request)->wait();
         
@@ -97,9 +86,7 @@ class OrderController extends BaseController
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer ' . $_SESSION['token']
         ];
-        $query = '{
-            "store_id": "test"
-        }';
+        $query = '{ }';
         $request = new Request('GET', '/orders/storeOrders', $headers, $query);
         $res = $this->client->sendAsync($request)->wait();
         $data = $res->getBody()->getContents();

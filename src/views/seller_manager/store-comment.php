@@ -1,5 +1,5 @@
 <div class="wrapper ">
-    <div class="sidebar" data-color="rose" data-background-color="black" data-image="assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="rose" data-background-color="black" data-image="../../assets/img/sidebar-1.jpg">
         <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -15,10 +15,10 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="nav-item active">
-                    <a class="nav-link " href="<?= STORE_ORDER_URI ?>">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= STORE_ORDER_URI ?>">
                         <i class="material-icons">dashboard</i>
-                        <p> Quản lý đơn hàng </p>
+                        <p> Quản lý hoá đơn </p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -28,14 +28,15 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item active">
                     <a class="nav-link" href="<?= STORE_COMMENT_URI ?>">
                         <i class="material-icons">comment</i>
                         <p> Quản lý comment
                         </p>
                     </a>
-
+                  
                 </li>
+                
             </ul>
         </div>
     </div>
@@ -107,7 +108,7 @@
                                 <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="<?=LOGOUT_URI?>">Log out</a>
+                                <a class="dropdown-item" href="#">Log out</a>
                             </div>
                         </li>
                     </ul>
@@ -135,111 +136,50 @@
                                         cellspacing="0" width="100%" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Customer</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Address</th>
-                                                <th>Products</th>
-                                                <th>Amount</th>
-                                                <th>Price</th>
-                                                <th>Total</th>
-                                                <th class="disabled-sorting text-right">Actions</th>
+                                                <th>Khách Hàng</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Comment</th>
+                                                <th>Rate</th>
+                                                <th>Trả lời</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Customer</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Address</th>
-                                                <th>Products</th>
-                                                <th>Amount</th>
-                                                <th>Price</th>
-                                                <th>Total</th>
-                                                <th class="text-right">Actions</th>
+                                                <th>Khách Hàng</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Comment</th>
+                                                <th>Rate</th>
+                                                <th>Trả lời</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <?php
-                              foreach ($response as $order) 
-                              {
-                          ?>
+                                            <?php foreach($comments as $comment) :?>
                                             <tr>
-                                                <td><?=$order->receiver_name?></td>
-                                                <td><?=$order->phone?></td>
-                                                <td><?=$order->email?></td>
-                                                <td><?=$order->address?></td>
+                                                <td><?= $comment->name?></td>
+                                                <td><?= $comment->goods_id?></td>
+
+                                                <td><?= $comment->comment?></td>
+                                                <td><?= $comment->star?></td>
                                                 <td>
-                                                    <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                                    <?=$item->name?><br>
-                                                    <?php
-                                    }
-                                ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                                    <?=$item->quantity?><br>
-                                                    <?php
-                                  }
-                                ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                  foreach ($order->items as $item) 
-                                  {
-                                ?>
-                                                    <?=$item->sum_amount?><br>
-                                                    <?php
-                                  }
-                                ?>
-                                                </td>
-                                                <td><?=$order->total_amount?></td>
-                                                <td class="text-right">
-                                                    <!-- <select class="selectpicker select-status" name="status" data-id="<?=$order->_id?>" data-style="btn btn-link" title="">
-                                <?php if(strcmp($order->status, 'Submitted' ) == 0): ?>
-                                  <option value="Submitted" disabled selected>Chờ xử lý</option>
-                                  <option value="In process">Đang chuẩn bị</option>
-                                  <option value="Rejected">Huỷ</option>
-                                <?php endif; ?> 
-                                <?php if(strcmp($order->status, 'In process' ) == 0): ?>
-                                  <option value="In process">Đang chuẩn bị</option>
-                                  <option value="Ready to delivery">Sẵn sàng Giao</option>
-                                <?php endif; ?> 
-                                </select> -->
-                                                    <?php if(strcmp($order->status, 'Submitted' ) == 0): ?>
-                                                    <form action="index.php?controller=order&action=updateOrderStatus"
-                                                        method="POST" class="btn btn-link btn-info btn-just-icon like">
-                                                        <input type="hidden" name="status" value="In process">
-                                                        <input type="hidden" name="order_id" value="<?=$order->_id?>">
-                                                        <button type="submit" class="material-icons">done</button>
-                                                    </form>
-                                                    <form action="index.php?controller=order&action=updateOrderStatus"
-                                                        method="POST"
-                                                        class="btn btn-link btn-danger btn-just-icon remove">
-                                                        <input type="hidden" name="status" value="Rejected">
-                                                        <input type="hidden" name="order_id" value="<?=$order->_id?>">
-                                                        <button type="submit" class="material-icons">close</button>
-                                                    </form>
+                                                    <?php if(isset($comment->reply)) : ?>
+                                                    <?= $comment->reply ?>
                                                     <?php else: ?>
-                                                    <form action="index.php?controller=order&action=updateOrderStatus"
-                                                        method="POST"
-                                                        class="btn btn-link btn-warning btn-just-icon edit">
-                                                        <input type="hidden" name="status" value="Ready to delivery">
-                                                        <input type="hidden" name="order_id" value="<?=$order->_id?>">
-                                                        <button type="submit" class="material-icons">dvr</button>
+                                                    <form action="<?= STORE_REPLY_COMMENT_URI?>" method="POST">
+                                                        <div
+                                                            style="display: flex;flex-wrap: wrap;align-items: center;justify-content: space-between;">
+                                                            <input type="hidden" class="form-control" name="comment_id"
+                                                                value="<?= $comment->_id?>">
+                                                            <input type="text" class="form-control  col-md-7"
+                                                                required="true" name="reply">
+                                                            <button type="submit"
+                                                                class="btn btn-rose  col-md-4">reply</button>
+                                                        </div>
+
                                                     </form>
                                                     <?php endif; ?>
                                                 </td>
-                                            </tr>
-                                            <?php
-                              }
-                          ?>
+
+                                                <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -352,22 +292,22 @@
             <li class="header-title">Images</li>
             <li class="active">
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="assets/img/sidebar-1.jpg" alt="">
+                    <img src="../../assets/img/sidebar-1.jpg" alt="">
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="assets/img/sidebar-2.jpg" alt="">
+                    <img src="../../assets/img/sidebar-2.jpg" alt="">
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="assets/img/sidebar-3.jpg" alt="">
+                    <img src="../../assets/img/sidebar-3.jpg" alt="">
                 </a>
             </li>
             <li>
                 <a class="img-holder switch-trigger" href="javascript:void(0)">
-                    <img src="assets/img/sidebar-4.jpg" alt="">
+                    <img src="../../assets/img/sidebar-4.jpg" alt="">
                 </a>
             </li>
             <li class="button-container">
