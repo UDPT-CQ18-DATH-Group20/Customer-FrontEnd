@@ -10,7 +10,7 @@ class CommentModel
 
     function __construct()
     {
-        $this->client = new Client(['base_uri' => 'http://host.docker.internal']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3005']);
     }
     public function getCommentByProduct($goods_id,$page)
     {

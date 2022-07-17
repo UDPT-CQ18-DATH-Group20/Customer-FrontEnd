@@ -29,9 +29,7 @@
                                             <?= $item->name ?>
                                         </a>
                                     </td>
-                                    <td class="price-pr">
-                                        <p><?= $item->price ?></p>
-                                    </td>
+
                                     <td class="quantity-box"><input type="number" size="4" value="<?= $item->quantity ?>" min="1" step="1" class="c-input-text qty text"></td>
                                     <td class="total-pr">
                                         <p><?= $item->sum_amount ?></p>

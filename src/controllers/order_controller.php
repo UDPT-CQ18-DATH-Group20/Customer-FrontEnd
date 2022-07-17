@@ -8,9 +8,8 @@ class OrderController extends BaseController
     public function __construct()
     {
         $this->folder = 'order';
-        $this->client = new Client(['base_uri' => 'http://localhost:3006']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3003']);
         //$this->client = new Client(['base_uri' => 'http://host.docker.internal']);
-         $_SESSION['token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmIzNzJlMWIwOWQ0YjYyN2M3NDQyZDciLCJ1c2VyX3R5cGUiOjEsImFjY291bnRfaW5mbyI6IjYyYjM3MmUxYjA5ZDRiNjI3Yzc0NDJkNiIsImlhdCI6MTY1NjE0MTkzMX0.DuwmatBqWytxvo5G3EnVNC7hWtPCM58_1YewHVdy8HU';
     }
     public function render($view, $data=[])
     {
@@ -35,17 +34,11 @@ class OrderController extends BaseController
     public function checkOut()
     {
         //Send request to gateway
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $_SESSION['token']
-        ];
-        $query = '{ }';
-        $request = new Request('GET', '/cart', $headers, $query);
-        $res = $this->client->sendAsync($request)->wait();
-        $data = $res->getBody()->getContents();
 
-        //print_r($data);
-        $this->render('checkOut', ["cart" => json_decode($data)]);
+        $cartModel =  $this->model("CartModel");
+        $data =$cartModel->getCart( $_SESSION['token']);
+      
+        $this->render('checkOut', ["cart" => $data]);
     }
 
     public function createOrder()

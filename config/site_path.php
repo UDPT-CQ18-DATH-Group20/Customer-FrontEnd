@@ -14,6 +14,11 @@ define("STORE_COMMENT_URI", "index.php?controller=manager&action=index");
 define("STORE_REPLY_COMMENT_URI", "index.php?controller=manager&action=reply-comment");
 define("STORE_PRODUCT_URI", "index.php?controller=manager&action=manager-product");
 define("STORE_CREATE_PRODUCT_URI", "index.php?controller=manager&action=create-product");
+define("DELIVERY_URI", "index.php?controller=order&action=loadReadyToDelivery");
+define("STORE_ORDER_URI", "index.php?controller=order&action=loadOrdersOfStore");
+// define("STORE_CREATE_PRODUCT_URI", "index.php?controller=manager&action=create-product");
+// define("STORE_CREATE_PRODUCT_URI", "index.php?controller=manager&action=create-product");
+
 
 define('PUBLIC_URI', 'public/');
 define('STYLE_SHEET_URI', PUBLIC_URI . 'css/');

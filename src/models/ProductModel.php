@@ -11,7 +11,7 @@ class ProductModel
 
     function __construct()
     {
-        $this->client = new Client(['base_uri' => 'http://host.docker.internal']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3001']);
     }
     public function getProductById($id)
     {
