@@ -22,6 +22,7 @@ $controllers = array(
     'product' => array('index', "add-to-cart"),
     'cart' => array('index', 'remove-item', "update-item"),
     'order' => array('checkOut', 'createOrder', 'loadOrdersOfCustomer', 'loadOrdersOfStore', 'updateOrderStatus', 'loadReadyToDelivery'),
+    'manager' => array('index','reply-comment','manager-product','create-product')
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
