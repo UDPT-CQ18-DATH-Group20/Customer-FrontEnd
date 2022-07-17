@@ -14,9 +14,9 @@
             </a>
         </div>
         <div class="sidebar-wrapper">
-            <ul class="nav">
+        <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="<?= STORE_ORDER_URI ?>">
                         <i class="material-icons">dashboard</i>
                         <p> Quản lý hoá đơn </p>
                     </a>
@@ -28,15 +28,15 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" href="<?= STORE_COMMENT_URI ?>">
                         <i class="material-icons">comment</i>
                         <p> Quản lý comment
                         </p>
                     </a>
-
+                  
                 </li>
-
+                
             </ul>
         </div>
     </div>

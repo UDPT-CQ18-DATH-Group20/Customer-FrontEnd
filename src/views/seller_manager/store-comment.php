@@ -16,7 +16,7 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="<?= STORE_ORDER_URI ?>">
                         <i class="material-icons">dashboard</i>
                         <p> Quản lý hoá đơn </p>
                     </a>
