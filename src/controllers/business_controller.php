@@ -31,10 +31,7 @@ class BusinessController extends BaseController
     }
     public function index()
     {
-        //redirect_to("register-seller");
-        $this->render('profile', [
-            "template"=> "template_buiness"
-        ]);
+      $this->loadProfiles();
     }
     public function reArrayFiles(&$file_post) {
  
@@ -57,9 +54,22 @@ class BusinessController extends BaseController
     {
       $businessModel = $this->model("BusinessModel");
       $result = $businessModel->getValidatingProfiles();
-        //redirect_to("register-seller");
+      //print_r($result);
         $this->render('profile', [
-            "template"=> "template_buiness",
+            "template"=> "template_s",
+            "response"=> json_decode($result)
+        ]);
+    }
+
+    public function loadProfileDetail(){
+      $businessModel = $this->model("BusinessModel");
+      
+      $id = $_POST['profile_id'];
+      $result = $businessModel->getProfileDetail($id);
+      //print_r($result);
+      
+        $this->render('profileDetail', [
+            "template"=> "template_business",
             "response"=> json_decode($result)
         ]);
     }
@@ -68,7 +78,7 @@ class BusinessController extends BaseController
     {
         if (is_get_request()){
             $this->render('register-seller', [
-                "template"=> "template_buiness"
+                "template"=> "template_business"
             ]);
         }
         if (is_post_request()){

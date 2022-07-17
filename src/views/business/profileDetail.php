@@ -161,53 +161,18 @@
                   <div class="toolbar">
                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                   </div>
-                  <div class="material-datatables">
-                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th>Tên</th>
-                          <th>Trạng Thái</th>
-                          <th>Email</th>
-                          <th>Địa Chỉ</th>
-                          <th>Điện Thoại</th>
-                          <th class="disabled-sorting text-right">Actions</th>
-                        </tr>
-                      </thead>
 
-                      <tbody>
-                        <?php
-                          foreach ($response as $profile) 
-                            {
-                        ?>
-                          <tr>
-                            <td class="name-pr">
-                              <?=$profile->name?>
-                            </td>
-                            <td class="name-pr">
-                              <?=$profile->status?>
-                            </td>
-                            <td class="name-pr">
-                              <?=$profile->email?>
-                            </td>
-                            <td class="name-pr">
-                              <?=$profile->address?>
-                            </td>
-                            <td class="name-pr">
-                              <?=$profile->phone?>
-                            </td>
-                            <td class="text-right">
-                            <form action="index.php?controller=business&action=loadProfileDetail" method="POST" class="btn btn-link btn-warning btn-just-icon edit">
-                                <button type="submit" name="profile_id" value="<?=$profile->_id?>" class="material-icons">dvr</button>
-                            </form>
-                              <!-- <a href="index.php?controller=business&action=index" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a> -->
-                            </td>
-                          </tr>
-                        <?php
-                            }
-                        ?>  
-                      </tbody>
-                    </table>  
+                  <div class="form-group has-default bmd-form-group is-filled">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                        <i class="material-icons">account_circle</i>
+                        </span>
+                      </div>
+                        <input type="text" name="username" class="form-control" placeholder="Tên tài khoản" required="true">
+                    </div>
                   </div>
+                  
                 </div>
                 <!-- end content-->
               </div>
