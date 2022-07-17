@@ -8,8 +8,9 @@ class OrderController extends BaseController
     public function __construct()
     {
         $this->folder = 'order';
-        $this->client = new Client(['base_uri' => 'http://localhost:3001']);
-        $_SESSION['token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmIzNzJlMWIwOWQ0YjYyN2M3NDQyZDciLCJ1c2VyX3R5cGUiOjEsImFjY291bnRfaW5mbyI6IjYyYjM3MmUxYjA5ZDRiNjI3Yzc0NDJkNiIsImlhdCI6MTY1NjE0MTkzMX0.DuwmatBqWytxvo5G3EnVNC7hWtPCM58_1YewHVdy8HU';
+        // $this->client = new Client(['base_uri' => 'http://localhost:3001']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal']);
+        // $_SESSION['token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmIzNzJlMWIwOWQ0YjYyN2M3NDQyZDciLCJ1c2VyX3R5cGUiOjEsImFjY291bnRfaW5mbyI6IjYyYjM3MmUxYjA5ZDRiNjI3Yzc0NDJkNiIsImlhdCI6MTY1NjE0MTkzMX0.DuwmatBqWytxvo5G3EnVNC7hWtPCM58_1YewHVdy8HU';
     }
     public function render($view, $data=[])
     {
@@ -62,7 +63,7 @@ class OrderController extends BaseController
             "email": "'.$_POST['email'].'",
             "address": "'.$_POST['address'].'"
         }';
-        $request = new Request('POST', '/orders/create', $headers, $body);
+        $request = new Request('POST', '/orders/createOrder', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         //
 
@@ -125,7 +126,7 @@ class OrderController extends BaseController
 
     public function updateOrderStatus()
     {
-        //Send request to gateway
+         //Send request to gateway
         $headers = [
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer ' . $_SESSION['token']
@@ -135,12 +136,17 @@ class OrderController extends BaseController
             "status": "'.$_POST['status'].'"
         }';
 
-        print_r($body);
+        //print_r($body);
         $request = new Request('POST', '/orders/update', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         //
 
-        $data = $res->getBody()->getContents();
-        $this->render('checkOut', ["response" => json_decode($data)]);
+        if (strcmp($_POST['status'], 'In process') == 0 || strcmp($_POST['status'], 'Rejected') == 0
+         || strcmp($_POST['status'], 'Ready to delivery') == 0) {
+            redirect_to('index.php?controller=order&action=loadOrdersOfStore');
+            return;
+        }
+
+        redirect_to('index.php?controller=order&action=loadReadyToDelivery');
     }
 }
