@@ -10,7 +10,7 @@ class AccountModel
 
     function __construct()
     {
-        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3000']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal/api/']);
     }
 
     public function signUp()
@@ -31,7 +31,7 @@ class AccountModel
             "email": "' . $email . '",
             "name": "' . $name . '"
         }';
-        $request = new Request('POST', '/users/signup', $headers, $body);
+        $request = new Request('POST', 'users/signup', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         return $res;
     }
@@ -47,7 +47,7 @@ class AccountModel
             "username": "' . $username . '",
             "password": "' . $password . '"
         }';
-        $request = new Request('POST', '/users/login', $headers, $body);
+        $request = new Request('POST', 'users/login', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         return $res;
     }

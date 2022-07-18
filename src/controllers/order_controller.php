@@ -1,4 +1,5 @@
 <?php require(CONTROLLER_PATH . "base_controller.php");
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
@@ -8,15 +9,15 @@ class OrderController extends BaseController
     public function __construct()
     {
         $this->folder = 'order';
-        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3003']);
-        //$this->client = new Client(['base_uri' => 'http://host.docker.internal']);
+        // $this->client = new Client(['base_uri' => 'http://f:3003']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal/api/']);
     }
-    public function render($view, $data=[])
+    public function render($view, $data = [])
     {
         $view_file = VIEW_PATH . $this->folder . '/' . $view . '.php';
         $template = 'index';
-        if (isset($data->template)) {
-            $template = $data->template;
+        if (isset($data["template"])) {
+            $template = $data["template"];
         }
         if (is_file($view_file)) {
             if (!is_null($data))
@@ -36,8 +37,8 @@ class OrderController extends BaseController
         //Send request to gateway
 
         $cartModel =  $this->model("CartModel");
-        $data =$cartModel->getCart( $_SESSION['token']);
-      
+        $data = $cartModel->getCart($_SESSION['token']);
+
         $this->render('checkOut', ["cart" => $data]);
     }
 
@@ -49,12 +50,12 @@ class OrderController extends BaseController
             'Authorization' => 'Bearer ' . $_SESSION['token']
         ];
         $body = '{
-            "receiver": "'.$_POST['receiver'].'",
-            "phone": "'.$_POST['phone'].'",
-            "email": "'.$_POST['email'].'",
-            "address": "'.$_POST['address'].'"
+            "receiver": "' . $_POST['receiver'] . '",
+            "phone": "' . $_POST['phone'] . '",
+            "email": "' . $_POST['email'] . '",
+            "address": "' . $_POST['address'] . '"
         }';
-        $request = new Request('POST', '/orders/create', $headers, $body);
+        $request = new Request('POST', 'orders/create', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         //
 
@@ -70,9 +71,9 @@ class OrderController extends BaseController
             'Authorization' => 'Bearer ' . $_SESSION['token']
         ];
         $query = '{ }';
-        $request = new Request('GET', '/orders/customerOrders', $headers, $query);
+        $request = new Request('GET', 'orders/customerOrders', $headers, $query);
         $res = $this->client->sendAsync($request)->wait();
-        
+
         //xem lich su mua hang theo khach hang
         $data = $res->getBody()->getContents();
         //print_r($data);
@@ -87,7 +88,7 @@ class OrderController extends BaseController
             'Authorization' => 'Bearer ' . $_SESSION['token']
         ];
         $query = '{ }';
-        $request = new Request('GET', '/orders/storeOrders', $headers, $query);
+        $request = new Request('GET', 'orders/storeOrders', $headers, $query);
         $res = $this->client->sendAsync($request)->wait();
         $data = $res->getBody()->getContents();
         //get order theo của hàng cho tai khoan seller quan ly don hang
@@ -103,7 +104,7 @@ class OrderController extends BaseController
             'Authorization' => 'Bearer ' . $_SESSION['token']
         ];
         $query = '{ }';
-        $request = new Request('GET', '/orders/readyOrders', $headers, $query);
+        $request = new Request('GET', 'orders/readyOrders', $headers, $query);
         $res = $this->client->sendAsync($request)->wait();
         $data = $res->getBody()->getContents();
         //get order theo của hàng cho tai khoan seller quan ly don hang
@@ -113,23 +114,25 @@ class OrderController extends BaseController
 
     public function updateOrderStatus()
     {
-         //Send request to gateway
+        //Send request to gateway
         $headers = [
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer ' . $_SESSION['token']
         ];
         $body = '{
-            "order_id": "'.$_POST['order_id'].'",
-            "status": "'.$_POST['status'].'"
+            "order_id": "' . $_POST['order_id'] . '",
+            "status": "' . $_POST['status'] . '"
         }';
 
         //print_r($body);
-        $request = new Request('POST', '/orders/update', $headers, $body);
+        $request = new Request('POST', 'orders/update', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         //
 
-        if (strcmp($_POST['status'], 'In process') == 0 || strcmp($_POST['status'], 'Rejected') == 0
-         || strcmp($_POST['status'], 'Ready to delivery') == 0) {
+        if (
+            strcmp($_POST['status'], 'In process') == 0 || strcmp($_POST['status'], 'Rejected') == 0
+            || strcmp($_POST['status'], 'Ready to delivery') == 0
+        ) {
             redirect_to('index.php?controller=order&action=loadOrdersOfStore');
             return;
         }
