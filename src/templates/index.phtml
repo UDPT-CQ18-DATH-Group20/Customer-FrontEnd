@@ -59,6 +59,7 @@
                         <li class="nav-item">
                             <a href="<?= SHOPPING_URI ?>" class="nav-link">SHOP</a>
                         </li>
+                        
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -74,14 +75,26 @@
                                     <p>My Cart</p>
                                 </a>
                             </li>
+                            <li class="side-menu">
+                                <a href="<?= CUSTOMER_ORDER_URI ?>">
+                                    <i class="fa fa-truck"></i>
+                                    <!-- <span class="badge">3</span> -->
+                                    <p>My Cart</p>
+                                </a>
+                            </li>
                         <?php endif; ?>
                         <li>
-                            <a href="/index.php?controller=account&action=login">
-                                <i class="fa fa-user s_color"></i>
-                                <?php if (!isset($_SESSION["token"])) : ?>
-                                    login
-                                <?php endif; ?>
+                        <?php if (!isset($_SESSION["token"])) : ?>
+                            <a href="<?=LOGIN_URI?>">
+                                <i class="fa fa-user s_color"></i>                
+                                login
                             </a>
+                        <?php else: ?>
+                            <a href="<?=LOGOUT_URI?>">
+                                <i class="fa fa-user s_color"></i>                
+                                logout
+                            </a>
+                        <?php endif; ?>
                         </li>
                     </ul>
                 </div>
@@ -128,6 +141,7 @@
 
         <!-- ALL JS FILES -->
         <script src="js/jquery-3.2.1.min.js"></script>
+
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <!-- ALL PLUGINS -->
@@ -144,6 +158,7 @@
         <script src="js/form-validator.min.js"></script>
         <script src="js/contact-form-script.js"></script>
         <script src="js/custom.js"></script>
+        <script src="script/order/index.js"></script>
 </body>
 
 </html>

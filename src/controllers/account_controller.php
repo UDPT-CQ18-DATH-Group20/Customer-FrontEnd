@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Exception\ClientException;
 
+$key = 'secretKey';
 class AccountController extends  BaseController
 {
     public function __construct()
@@ -37,16 +38,20 @@ class AccountController extends  BaseController
     }
     function index()
     {
-        header("Location: /index.php?controller=account&action=login");
+        header("Location: ".LOGIN_URI);
     }
     function login()
-    {
+    {           
+        $modelAccount = $this->model("AccountModel");
+        $modelAccount->redirect();
         $this->render("login", [
             "template" => "template_login",
         ]);
     }
     function register()
     {
+        $modelAccount = $this->model("AccountModel");
+        $modelAccount->redirect();
         $this->render("register", [
             "template" => "template_login",
         ]);
@@ -58,11 +63,10 @@ class AccountController extends  BaseController
             $result = $modelAccount->signIn();
             $content = $result->getBody()->getContents();
             $_SESSION["token"] = json_decode($content)->token;
-
             if (isset($_SESSION["back-url"])) {
                 redirect_to($_SESSION["back-url"]);
                 unset($_SESSION["back-url"]);
-            } else redirect_to(HOME_URI);
+            } else $modelAccount->redirect();
         } catch (ClientException $e) {
             if ($e->hasResponse()) {
                 if ($e->getResponse()->getStatusCode() == '400') {
@@ -72,6 +76,7 @@ class AccountController extends  BaseController
                 }
             }
         }
+        
     }
     function logout()
     {
@@ -80,7 +85,6 @@ class AccountController extends  BaseController
         header("Location: " . LOGIN_URI);
         exit;
     }
-
     function signUp()
     {
         try {
@@ -95,7 +99,6 @@ class AccountController extends  BaseController
             $token = json_decode($content)->token;
             $cartModel = $this->model("CartModel");
             $result = $cartModel->createCart($token);
-            header("Location: " . LOGIN_URI);
         } catch (ClientException  $e) {
             if ($e->hasResponse()) {
                 if ($e->getResponse()->getStatusCode() == '400') {
@@ -106,4 +109,5 @@ class AccountController extends  BaseController
             }
         }
     }
+
 }
