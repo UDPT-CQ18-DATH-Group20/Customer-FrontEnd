@@ -41,6 +41,22 @@ class ManagerController extends  BaseController
         $comments = $modelComment->getCommentByStore()->getBody()->getContents();
         $this->render('store-comment',["template"=>"teamplate_store", "comments"=> json_decode($comments)]);
     }
+    public function createComment()
+    {
+        $this->checkCustomRequireLogin();
+        if (is_post_request()){
+            $order_id=$_POST["order_id"];
+            $goods_id=$_POST["goods_id"];
+            
+            $star=$_POST["star"];
+            $comment=$_POST["comment"];
+            
+            $modelComment = $this->model("CommentModel");
+            $comments = $modelComment->postComment($order_id,$goods_id, $star,$comment)->getBody()->getContents();
+            echo json_decode( $comments);
+            //header('Location: ' . CUSTOMER_ORDER_URI);
+        }
+    }
     public function replyComment()
     {
         $this->checkCustomRequireLogin();

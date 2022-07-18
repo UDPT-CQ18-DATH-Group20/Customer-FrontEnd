@@ -23,7 +23,7 @@ $controllers = array(
     'business' => array('index',"register", "loadProfiles", "loadProfileDetail"),
     'cart' => array('index', 'remove-item', "update-item"),
     'order' => array('checkOut', 'createOrder', 'loadOrdersOfCustomer', 'loadOrdersOfStore', 'updateOrderStatus', 'loadReadyToDelivery'),
-    'manager' => array('index','reply-comment','manager-product','create-product')
+    'manager' => array('index','reply-comment','manager-product','create-product','create-comment')
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {

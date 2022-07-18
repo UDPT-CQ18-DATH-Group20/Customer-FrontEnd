@@ -1,5 +1,6 @@
 <?php
-
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
@@ -7,10 +8,10 @@ use GuzzleHttp\Exception\RequestException;
 class AccountModel
 {
     public $client;
-
+    private $key= "secretKey";
     function __construct()
     {
-        $this->client = new Client(['base_uri' => 'http://host.docker.internal:3000']);
+        $this->client = new Client(['base_uri' => 'http://host.docker.internal/api/']);
     }
 
     public function signUp()
@@ -31,7 +32,7 @@ class AccountModel
             "email": "' . $email . '",
             "name": "' . $name . '"
         }';
-        $request = new Request('POST', '/users/signup', $headers, $body);
+        $request = new Request('POST', 'users/signup', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         return $res;
     }
@@ -47,7 +48,7 @@ class AccountModel
             "username": "' . $username . '",
             "password": "' . $password . '"
         }';
-        $request = new Request('POST', '/users/login', $headers, $body);
+        $request = new Request('POST', 'users/login', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         return $res;
     }
@@ -55,5 +56,25 @@ class AccountModel
     public function isUserLogin()
     {
         return isset($_SESSION["token"]) ? true : false;
+    }
+
+    public function redirect(){
+        if(isset($_SESSION["token"])){
+            $token  = $_SESSION["token"];
+            $decoded = JWT::decode($token, new Key($this->key, 'HS256'));
+            if($decoded->user_type == 1){
+                redirect_to(HOME_URI);
+            }
+            if($decoded->user_type == 2){
+                redirect_to(STORE_ORDER_URI);
+            }
+            if($decoded->user_type == 3){
+                redirect_to(DELIVERY_URI);
+            }
+            if($decoded->user_type == 4){
+                redirect_to(HOME_URI);
+            }
+        }
+       
     }
 }

@@ -37,16 +37,20 @@ class CommentModel
         $res = $this->client->sendAsync($request)->wait();
         return $res;
     }
-    public function postComment($store_id,$page)
+    public function postComment($order_id,$goods_id,$star,$comment)
     {
+        $token = $_SESSION["token"];
         $headers = [
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
+            "Authorization" => "Bearer " . $token
         ];
         $body = '{
-            "store_id": "' . $store_id . '",
-            "page": "' . $page . '"
+            "order_id": "' . $order_id . '",
+            "goods_id": "' . $goods_id . '",
+            "star": "' . $star . '",
+            "comment": "' . $comment . '"
         }';
-        $request = new Request('GET', '/api/comment', $headers, $body);
+        $request = new Request('POST', '/api/comment', $headers, $body);
         $res = $this->client->sendAsync($request)->wait();
         return $res;
     }

@@ -12,14 +12,19 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-                <li class="nav-item  active ">
-                    <a href="/index.php?controller=account&action=register" class="nav-link">
-                        <i class="material-icons">person_add</i> Đăng kí
+                <li class="nav-item">
+                    <a href="<?=HOME_URI?>" class="nav-link">
+                        <i class="material-icons">home</i> Trang Chủ
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="/index.php?controller=account&action=login" class="nav-link">
+                    <a href="<?=LOGIN_URI?>" class="nav-link">
                         <i class="material-icons">fingerprint</i> Đăng nhập
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="<?= REGISTER_URI?>" class="nav-link">
+                        <i class="material-icons">person_add</i> Đăng kí
                     </a>
                 </li>
             </ul>
@@ -36,8 +41,7 @@
                     <div class="card card-signup">
                         <h2 class="card-title text-center">Register</h2>
                         <div class="card-body">
-                            <form class="form" method="POST"
-                                action="/index.php?controller=account&action=sign-up">
+                            <form class="form" method="POST" action="/index.php?controller=account&action=sign-up">
                                 <div class="row">
                                     <div class="col-md-5 mr-auto">
                                         <div class="form-group has-default">
