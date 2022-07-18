@@ -9,22 +9,25 @@ $(document).ready(function() {
         console.log(recipient,order_id)
         modal.find('.modal-body').empty()
         recipient.forEach(element => {
-        modal.find('.modal-body').append(`
-        <form class="post-comment"  onSubmit="return false;" action="/index.php?controller=manager&action=create-comment" method="post">
-            <div class="product-name">
-                ${element.name}
-            </div>
-            <div class="form-group">
-                <input type="hidden" name="order_id" id="order_id"  value="${order_id}"/>
-                <input type="hidden" name="goods_id" id="goods_id" value="${element.goods_id}"/>
-                <input type="number" name="star" id="star" class="rating text-warning"
-                    data-clearable="remove" value="5" />
-                <input type="text" name="comment" class="form-control" id="recipient-name">
-                <button type="submit" class="btn btn-primary">Đánh giá</button>
-            </div>
-        </form>
-        <hr>
-        `)
+            if(!element.is_comment){
+                modal.find('.modal-body').append(`
+                <form class="post-comment"  onSubmit="return false;" action="/index.php?controller=manager&action=create-comment" method="post">
+                    <div class="product-name">
+                        ${element.name}
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="order_id" id="order_id"  value="${order_id}"/>
+                        <input type="hidden" name="goods_id" id="goods_id" value="${element.goods_id}"/>
+                        <input type="number" name="star" id="star" class="rating text-warning"
+                            data-clearable="remove" value="5" />
+                        <input type="text" name="comment" class="form-control" id="recipient-name">
+                        <button type="submit" class="btn btn-primary">Đánh giá</button>
+                    </div>
+                </form>
+                <hr>
+                `)
+            }
+                
         });
         modal.find('.modal-body').append(`
         <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>

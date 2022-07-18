@@ -94,7 +94,7 @@
                                  <td class="remove-pr">
                                      <?php if($order->status==="Received"):?>
                                      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                                         data-id="<?=$order->_id?>" data-whatever='<?= json_encode($order->items)?>'>Open modal for @mdo</a>
+                                         data-id="<?=$order->_id?>" data-whatever='<?= json_encode($order->items)?>'>Đánh giá</a>
                                      <?php endif;?>
                                  </td>
                                  <?php
