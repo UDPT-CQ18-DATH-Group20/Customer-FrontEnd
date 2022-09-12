@@ -1,7 +1,10 @@
 <?php
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ClientException;
+
 class GoodsTypeModel
 {
     public $client;
@@ -25,7 +28,8 @@ class GoodsTypeModel
             }
         }
     }
-    public function getProducts(){
+    public function getProducts()
+    {
         $token = $_SESSION['token'];
         $headers = [
             'Content-Type' => 'application/json',
@@ -47,7 +51,7 @@ class GoodsTypeModel
 
         try {
             $request = new Request('POST', '/api/store/create/goods');
-            $res = $this->client->sendAsync($request,$options)->wait();
+            $res = $this->client->sendAsync($request, $options)->wait();
             return $res;
         } catch (ClientException  $e) {
             if ($e->hasResponse()) {

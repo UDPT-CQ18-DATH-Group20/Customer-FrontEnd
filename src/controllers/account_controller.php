@@ -38,10 +38,10 @@ class AccountController extends  BaseController
     }
     function index()
     {
-        header("Location: ".LOGIN_URI);
+        header("Location: " . LOGIN_URI);
     }
     function login()
-    {           
+    {
         $modelAccount = $this->model("AccountModel");
         $modelAccount->redirect();
         $this->render("login", [
@@ -76,7 +76,6 @@ class AccountController extends  BaseController
                 }
             }
         }
-        
     }
     function logout()
     {
@@ -99,6 +98,8 @@ class AccountController extends  BaseController
             $token = json_decode($content)->token;
             $cartModel = $this->model("CartModel");
             $result = $cartModel->createCart($token);
+
+            redirect_to(LOGIN_URI);
         } catch (ClientException  $e) {
             if ($e->hasResponse()) {
                 if ($e->getResponse()->getStatusCode() == '400') {
@@ -109,5 +110,4 @@ class AccountController extends  BaseController
             }
         }
     }
-
 }
