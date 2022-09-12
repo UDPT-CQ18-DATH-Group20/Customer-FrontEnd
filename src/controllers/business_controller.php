@@ -56,7 +56,7 @@ class BusinessController extends BaseController
       $result = $businessModel->getValidatingProfiles();
       //print_r($result);
         $this->render('profile', [
-            "template"=> "template_s",
+            "template"=> "template_business",
             "response"=> json_decode($result)
         ]);
     }
